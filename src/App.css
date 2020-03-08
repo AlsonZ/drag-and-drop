@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 * {
   padding: 0;
   margin: 0;
@@ -5,5 +6,6 @@
 }
 
 .app-container {
-  background-color: #F3F3F3;
+  /* background-color: #F3F3F3; */
+  font-family: 'Lato', sans-serif;
 }

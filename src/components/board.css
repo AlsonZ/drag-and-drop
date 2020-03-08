@@ -3,7 +3,7 @@
   justify-content: space-between;
 
   width: 100%;
-  max-width: 765px;
+  /* max-width: 765px; */
   height: 100vh;
 
   overflow: hidden;
@@ -18,7 +18,7 @@
 
   width: 100%;
   /* max-width: 300px; */
-  max-width: 20rem;
+  max-width: 50rem;
 
   background-color: #313131;
   background: #313131;
@@ -27,7 +27,7 @@
 }
 
 .board .list .card {
-  width: 14rem;
+  /* width: 14rem; */
   /* width: 100%; */
   padding: 15px 25px;
   background-color: #F3F3F3;
