@@ -8,4 +8,6 @@
 .app-container {
   /* background-color: #F3F3F3; */
   font-family: 'Lato', sans-serif;
+  display: flex;
+  
 }

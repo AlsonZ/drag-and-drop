@@ -3,4 +3,19 @@
   border-radius: 2px;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
+  background-color: #F3F3F3;
+  /* display: flex; */
+
 }
+
+.task-container-highlight {
+  background-color: lightgreen;
+}
+
+/* .task-handle {
+  width: 20px;
+  height: 20px;
+  background-color: orange;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+} */
