@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import './App.css';
 // import Board from './components/Board.js';
 import initialData from './initial-data'
 import Column from './Column/Column';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-function App() {
+const ColumnInnerContainer = memo(({column, taskMap, index}) => {
+  const tasks = column.taskIds.map(taskId => taskMap[taskId]);
+
+  return <Column key={column.id} column={column} tasks={tasks} index={index}/>;
+});
+
+const ColumnContainer = ({data}) => {
+  return (
+    data.columnOrder.map((columnId, index) => {
+      const column = data.columns[columnId];
+
+      return <ColumnInnerContainer column={column} taskMap={data.tasks} index={index}/>
+    })
+  );
+}
+
+const App = () => {
 
   const [data, setData] = useState(initialData);
 
-  const loadColumns = () => {
-    return(
-      data.columnOrder.map(columnId => {
-        const column = data.columns[columnId];
-        const tasks = column.taskIds.map(taskId => data.tasks[taskId]);
-
-        return <Column key={column.id} column={column} tasks={tasks}/>;
-      })
-    );
-  }
+  
 
   const onDragEnd = (result) => {
     // document.body.style.color = 'inherit'
@@ -26,7 +33,7 @@ function App() {
     // console.log(result);
     // reorder the column
     // when u drop something
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
 
     if (!destination) {
       // not dropping a column so cancel the drop
@@ -37,6 +44,19 @@ function App() {
       destination.index === source.index
     ) {
       // dropped in original position
+      return;
+    }
+
+    if(type === 'column') {
+      const newColumnOrder = Array.from(data.columnOrder);
+      newColumnOrder.splice(source.index, 1);
+      newColumnOrder.splice(destination.index, 0, draggableId);
+
+      const newState = {
+        ...data,
+        columnOrder: newColumnOrder,
+      };
+      setData(newState);
       return;
     }
 
@@ -92,7 +112,7 @@ function App() {
     setData(newState);
   }
 
-  // const onDragStart = () => {
+  const onDragStart = () => {
   //   document.body.style.color = 'orange'
   //   document.body.style.transition = 'background-color 0.2s ease'
   // }
@@ -100,18 +120,24 @@ function App() {
   //   const { destination } = update;
   //   const opacity = destination ? destination.index / Object.keys(data.tasks).length : 0
   //   document.body.style.backgroundColor = `rgba(153, 141, 217, ${opacity})`;
-  // }
+  }
 
   return (
-    <div className="app-container">
-      <DragDropContext 
-        // onDragStart={onDragStart}
-        // onDragUpdate={onDragUpdate}
-        onDragEnd={onDragEnd}
-      >
-        {loadColumns()}
-      </DragDropContext>
-    </div>
+    <DragDropContext 
+      // onDragStart={onDragStart}
+      // onDragUpdate={onDragUpdate}
+      onDragEnd={onDragEnd}
+    >
+      <Droppable droppableId="all-columns" direction="horizontal" type="column">
+        {(provided) => (
+          <div className="app-container" {...provided.droppableProps} ref={provided.innerRef}>
+            {/* {loadColumns()} */}
+            <ColumnContainer data={data}/>
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 }
 
