@@ -1,7 +1,7 @@
 .column-container {
   margin: 0.5rem;
   border: 1px solid lightgrey;
-  background-color: white;
+  background-color: #F3F3F3;
   border-radius: 2px;
   width: 220px;
   display: flex;
@@ -15,8 +15,12 @@
 .column-task-list {
   padding: 0.5rem;
   flex-grow: 1;
-  min-height: 100px;
+  min-height: 50px;
 }
 .column-task-list-highlight {
   background-color: lightblue;
+}
+
+.testing-placeholder {
+  background-color: red;
 }
