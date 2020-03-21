@@ -3,13 +3,49 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  
+}
+.light {
+  --bg-colour: white;
+  --column-colour: #F3F3F3;
+  --task-colour: white;
+  --text-colour: black;
+  --task-highlight-colour: lightgreen;
+  --column-highlight-colour: lightblue;
+}
+.dark {
+  --bg-colour: #434343;
+  --column-colour: #333333;
+  --task-colour: #434343;
+  --text-colour: #D1D1D1;
+  --task-highlight-colour: darkgreen;
+  --column-highlight-colour: #000069;
 }
 
 .app-container {
-  /* background-color: #F3F3F3; */
+  background-color: var(--bg-colour);
   font-family: 'Lato', sans-serif;
   display: flex;
   min-height: 100vh;
   justify-content: center;
   align-items: flex-start;
+  color: var(--text-colour);
+}
+
+.app-inner-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.theme-button {
+  padding: 0.5rem;
+  margin: 1rem;
+  font-size: 1rem;
+  color: var(--text-colour);
+  background-color: var(--column-colour);
+  border-color: var(--column-colour);
+}
+.theme-button:focus {
+  outline: none;
 }

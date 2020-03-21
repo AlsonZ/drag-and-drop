@@ -1,6 +1,5 @@
 import React, { useState, memo } from 'react';
 import './App.css';
-// import Board from './components/Board.js';
 import initialData from './initial-data'
 import Column from './Column/Column';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -24,8 +23,15 @@ const ColumnContainer = ({data}) => {
 const App = () => {
 
   const [data, setData] = useState(initialData);
+  const [theme, setTheme] = useState("light");
 
-  
+  const onClickTheme = () => {
+    if(theme==="dark") {
+      setTheme('light');
+    } else {
+      setTheme('dark');
+    }
+  }
 
   const onDragEnd = (result) => {
     // document.body.style.color = 'inherit'
@@ -123,21 +129,26 @@ const App = () => {
   }
 
   return (
-    <DragDropContext 
-      // onDragStart={onDragStart}
-      // onDragUpdate={onDragUpdate}
-      onDragEnd={onDragEnd}
-    >
-      <Droppable droppableId="all-columns" direction="horizontal" type="column">
-        {(provided) => (
-          <div className="app-container" {...provided.droppableProps} ref={provided.innerRef}>
-            {/* {loadColumns()} */}
-            <ColumnContainer data={data}/>
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <div className={"app-container "+theme}>
+      <DragDropContext 
+        // onDragStart={onDragStart}
+        // onDragUpdate={onDragUpdate}
+        onDragEnd={onDragEnd}
+      >
+        <Droppable droppableId="all-columns" direction="horizontal" type="column">
+          {(provided) => (
+            <div className="app-inner-container" {...provided.droppableProps} ref={provided.innerRef}>
+              {/* {loadColumns()} */}
+              <ColumnContainer data={data}/>
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+      <div>
+        <button onClick={onClickTheme} className="theme-button">Toggle Theme</button>
+      </div>
+    </div>
   );
 }
 

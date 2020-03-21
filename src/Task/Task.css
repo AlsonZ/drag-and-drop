@@ -3,13 +3,13 @@
   border-radius: 2px;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
-  background-color: white;
+  background-color: var(--task-colour);
   /* display: flex; */
 
 }
 
 .task-container-highlight {
-  background-color: lightgreen;
+  background-color: var(--task-highlight-colour);
 }
 
 /* .task-handle {
