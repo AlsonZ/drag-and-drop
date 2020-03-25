@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import './App.css';
 import initialData from './initial-data'
 import Column from './Column/Column';
@@ -23,7 +23,11 @@ const ColumnContainer = ({data}) => {
 const App = () => {
 
   const [data, setData] = useState(initialData);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light');
+
+  useEffect(() => {
+      localStorage.setItem('theme', theme);
+  },[theme]);
 
   const onClickTheme = () => {
     if(theme==="dark") {

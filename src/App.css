@@ -42,9 +42,10 @@
   padding: 0.5rem;
   margin: 1rem;
   font-size: 1rem;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
   color: var(--text-colour);
   background-color: var(--column-colour);
-  border-color: var(--column-colour);
 }
 .theme-button:focus {
   outline: none;
